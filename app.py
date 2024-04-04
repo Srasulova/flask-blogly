@@ -66,3 +66,25 @@ def add_user():
 def show_user_detail(user_id):
     user = User.query.get_or_404(user_id)
     return render_template("detail.html", user=user)
+
+@app.route("/<int:user_id>/edit")
+def edit_user_page(user_id):
+    user = User.query.get_or_404(user_id)
+    return render_template("editUser.html", user = user)
+
+@app.route("/<int:user_id>/edit", methods=["POST"])
+def edit_user(user_id):
+    user = User.query.get_or_404(user_id)
+    user.first_name = request.form['first_name']
+    user.last_name = request.form["last_name"]
+    user.image_url = request.form['image_url']
+    db.session.commit()
+    return redirect(f'/{user.id}')
+
+
+@app.route("/<int:user_id>/delete")
+def delete_user(user_id):
+    user = User.query.get_or_404(user_id)
+    db.session.delete(user)
+    db.session.commit()
+    return redirect("/")

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flask Blogly</title>
+  </head>
+  <body>
+    <h1>Edit User</h1>
+
+    <form action={{ url_for('edit_user', user_id = user.id) }} method="POST">
+      <label for="first_name">First Name</label>
+      <input
+        type="text"
+        id="first_name"
+        name="first_name"
+        placeholder="Enter a first name"
+        value={{user.first_name}} 
+        required
+      />
+
+      <label for="last_name">Last Name</label>
+      <input
+        type="text"
+        id="last_name"
+        name="last_name"
+        placeholder="Enter a last name"
+        value={{user.last_name}} 
+        required
+      />
+
+      <label for="image_url">Image URL</label>
+      <input
+        type="text"
+        id="image_url"
+        name="image_url"
+        placeholder="Provide an image of this user"
+        value={{user.image_url}} 
+        required
+      />
+
+      <button>Save</button>
+      <a href="/">Cancel</a>
+    </form>
+  </body>
+</html>
