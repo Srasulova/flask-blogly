@@ -1,6 +1,7 @@
 """Models for Blogly."""
 
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 db = SQLAlchemy()
 
@@ -27,4 +28,19 @@ class User(db.Model):
                      nullable=False,
                      unique=True)
     image_url = db.Column(db.String, nullable=False)
+
+    posts = db.relationship('Post', backref = 'user', cascade = 'all, delete-orphan')
    
+
+
+class Post(db.Model):
+    """Post."""
+
+    __tablename__ = "posts"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement = True)
+    title = db.Column(db.String(100), nullable = False)
+    content = db.Column(db.Text, nullable = False)
+    created_at = db.Column(db.DateTime, nullable = False, default = datetime.now)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable= False)
+
