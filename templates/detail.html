@@ -17,6 +17,11 @@
     <button><a href="/">Cancel</a></button>
     <button><a href={{ url_for('show_add_post_new', user_id=user.id) }}>Add Post</a></button>
 
-    <p>Posts</p>
+    <ul>Posts</ul>
+{% for post in posts %}
+<li>
+  <a href="{{ url_for('show_post_detail', post_id=post.id) }}">{{ post.title }} {{ post.content }}</a>
+</li>
+{% endfor %}
   </body>
 </html>
